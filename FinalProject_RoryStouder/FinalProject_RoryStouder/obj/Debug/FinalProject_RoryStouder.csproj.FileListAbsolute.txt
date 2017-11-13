@@ -1,0 +1,6 @@
+E:\VS_Projects\GitHub\Final Project\FinalProject_RoryStouder\FinalProject_RoryStouder\obj\Debug\FinalProject_RoryStouder.csprojResolveAssemblyReference.cache
+E:\VS_Projects\GitHub\Final Project\FinalProject_RoryStouder\FinalProject_RoryStouder\obj\Debug\FinalProject_RoryStouder.Login.resources
+E:\VS_Projects\GitHub\Final Project\FinalProject_RoryStouder\FinalProject_RoryStouder\obj\Debug\FinalProject_RoryStouder.Properties.Resources.resources
+E:\VS_Projects\GitHub\Final Project\FinalProject_RoryStouder\FinalProject_RoryStouder\obj\Debug\FinalProject_RoryStouder.StockMain.resources
+E:\VS_Projects\GitHub\Final Project\FinalProject_RoryStouder\FinalProject_RoryStouder\obj\Debug\FinalProject_RoryStouder.csproj.GenerateResource.Cache
+E:\VS_Projects\GitHub\Final Project\FinalProject_RoryStouder\FinalProject_RoryStouder\obj\Debug\FinalProject_RoryStouder.csproj.CoreCompileInputs.cache
