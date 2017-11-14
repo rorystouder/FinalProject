@@ -21,7 +21,10 @@ namespace FinalProject_RoryStouder
 
         private void productsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Products products = new Products();
+            products.MdiParent = this;
+            products.Show();
+            
         }
 
         private void StockMain_FormClosing(object sender, FormClosingEventArgs e)

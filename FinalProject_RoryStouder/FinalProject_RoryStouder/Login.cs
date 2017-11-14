@@ -36,14 +36,14 @@ namespace FinalProject_RoryStouder
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            // TO-DO: Check Login username & Password
             //HOUSEKEEPING
             errProviderLogin.Clear();
             lblStatus.Text = string.Empty;
 
-            // must validate the username cannot be blank and in email form, and the password must be an integer.
+            // must validate the username cannot be blank and must be in email form, 
+            // and the password must be an integer.
             string username = txtUsername.Text;
-            int password = 0;
+            int password;
 
             bool IsValidEmail(string user)
             {
@@ -72,7 +72,7 @@ namespace FinalProject_RoryStouder
             }
 
 
-            if (loginAdapter.Search(loginAdapter.GetData(), username, password) > 0)
+            if (loginAdapter.Search(loginAdapter.GetData(), username, password.ToString()) > 0)
             {
                 StockMain mainForm = new StockMain();
                 mainForm.Show();
