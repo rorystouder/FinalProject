@@ -21,7 +21,7 @@ namespace FinalProject_RoryStouder
 
         private void productsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Products products = new Products();
+            frmProducts products = new frmProducts();
             products.MdiParent = this;
             products.Show();
             
