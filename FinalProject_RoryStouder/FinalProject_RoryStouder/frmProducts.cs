@@ -80,52 +80,64 @@ namespace FinalProject_RoryStouder
                 status = false;
             }
 
-            // add the new product to the database
-            try
+            if (IfProductExists())
             {
-                adapter.Insert(code, name, status);
-                lblStatus.Text = "Product added";
+                Update();
             }
-            catch
+            else
             {
-                lblStatus.Text = "Error adding new product";
+                // add the new product to the database
+                try
+                {
+                    adapter.Insert(code, name, status);
+                    lblStatus.Text = "Product added";
+                }
+                catch
+                {
+                    lblStatus.Text = "Error adding new product";
+                }
             }
 
             // reading the data form the data base.
             dgvProducts.DataSource = adapter.GetData();
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private bool IfProductExists()
         {
-            // HOUSEKEEPING
-            lblStatus.Text = "";
-
-            if (dgvProducts.SelectedRows.Count > 0)
-            {
-                DialogResult r =
-                    MessageBox.Show("Deleting the selected employee will permanently remove. Do you want to continue?",
-                    "Confirm Delete", MessageBoxButtons.YesNo);
-
-                if (r == DialogResult.Yes)
-                {
-                    string selectedId = dgvProducts.SelectedRows[0].Cells[0].Value.ToString();
-
-                    if (adapter.Delete(selectedId))
-                    {
-                        dgvProducts.DataSource = adapter.GetData();
-                        formLoading = true;
-                        UpdateForm();
-                        lblStatus.Text = "Employee deleted";
-                    }
-                    else
-                    {
-                        lblStatus.Text = "Error deleting this employee";
-                    }
-                }
-            }
+            return true;
         }
 
-            private void dgvProducts_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            //// HOUSEKEEPING
+            //lblStatus.Text = "";
+
+            //if (dgvProducts.SelectedRows.Count > 0)
+            //{
+            //    DialogResult r =
+            //        MessageBox.Show("Deleting the selected employee will permanently remove. Do you want to continue?",
+            //        "Confirm Delete", MessageBoxButtons.YesNo);
+
+            //    if (r == DialogResult.Yes)
+            //    {
+            //        string selectedId = dgvProducts.SelectedRows[0].Cells[0].Value.ToString();
+
+            //        if (adapter.Delete(selectedId))
+            //        {
+            //            dgvProducts.DataSource = adapter.GetData();
+            //            formLoading = true;
+            //            UpdateForm();
+            //            lblStatus.Text = "Employee deleted";
+            //        }
+            //        else
+            //        {
+            //            lblStatus.Text = "Error deleting this employee";
+            //        }
+            //    }
+            //}
+        }
+
+        private void dgvProducts_MouseDoubleClick(object sender, MouseEventArgs e)
             {
                 bool status = true;
                 txtProductCode.Text = dgvProducts.SelectedRows[0].Cells[0].Value.ToString();

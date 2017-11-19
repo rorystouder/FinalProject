@@ -2016,16 +2016,13 @@ namespace FinalProject_RoryStouder.StockDataSetTableAdapters {
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ProductStatus", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ProductStatus", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Products] SET [ProductCode] = @ProductCode, [ProductName] = @ProductName, [ProductStatus] = @ProductStatus WHERE (([ProductCode] = @Original_ProductCode) AND ([ProductName] = @Original_ProductName) AND ((@IsNull_ProductStatus = 1 AND [ProductStatus] IS NULL) OR ([ProductStatus] = @Original_ProductStatus)));
-SELECT ProductCode, ProductName, ProductStatus FROM Products WHERE (ProductCode = @ProductCode)";
+            this._adapter.UpdateCommand.CommandText = "UPDATE Products\r\nSET          ProductName = @ProductName, ProductStatus = @Produc" +
+                "tStatus\r\nWHERE  (ProductCode = @ProductCode);  \r\nSELECT ProductCode, ProductName" +
+                ", ProductStatus FROM Products WHERE (ProductCode = @ProductCode)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ProductCode", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ProductCode", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ProductName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ProductName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ProductStatus", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ProductStatus", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ProductCode", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ProductCode", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ProductName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ProductName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ProductStatus", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ProductStatus", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ProductStatus", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ProductStatus", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ProductName", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "ProductName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ProductStatus", global::System.Data.SqlDbType.Bit, 1, global::System.Data.ParameterDirection.Input, 0, 0, "ProductStatus", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ProductCode", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "ProductCode", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2170,35 +2167,20 @@ SELECT ProductCode, ProductName, ProductStatus FROM Products WHERE (ProductCode 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int ProductCode, string ProductName, global::System.Nullable<bool> ProductStatus, int Original_ProductCode, string Original_ProductName, global::System.Nullable<bool> Original_ProductStatus) {
-            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(ProductCode));
+        public virtual int Update(string ProductName, global::System.Nullable<bool> ProductStatus, int ProductCode) {
             if ((ProductName == null)) {
                 throw new global::System.ArgumentNullException("ProductName");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(ProductName));
+                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(ProductName));
             }
             if ((ProductStatus.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((bool)(ProductStatus.Value));
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((bool)(ProductStatus.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(Original_ProductCode));
-            if ((Original_ProductName == null)) {
-                throw new global::System.ArgumentNullException("Original_ProductName");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(Original_ProductName));
-            }
-            if ((Original_ProductStatus.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((bool)(Original_ProductStatus.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(ProductCode));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -2213,14 +2195,6 @@ SELECT ProductCode, ProductName, ProductStatus FROM Products WHERE (ProductCode 
                     this.Adapter.UpdateCommand.Connection.Close();
                 }
             }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string ProductName, global::System.Nullable<bool> ProductStatus, int Original_ProductCode, string Original_ProductName, global::System.Nullable<bool> Original_ProductStatus) {
-            return this.Update(Original_ProductCode, ProductName, ProductStatus, Original_ProductCode, Original_ProductName, Original_ProductStatus);
         }
     }
     

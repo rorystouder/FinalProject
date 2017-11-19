@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DBUtilites.cs" />
     <Compile Include="frmStock.cs">
       <SubType>Form</SubType>
     </Compile>
