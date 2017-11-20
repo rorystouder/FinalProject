@@ -31,5 +31,22 @@ namespace FinalProject_RoryStouder
         {
             Application.Exit();
         }
+
+        private void stockToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmStock products = new frmStock();
+            products.MdiParent = this;
+            products.Show();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
