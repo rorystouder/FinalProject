@@ -79,10 +79,10 @@ namespace FinalProject_RoryStouder
             }
 
             int selectedProductCode = (int)cboProducts.SelectedValue;
-            //int productQuantity = int.Parse(txtQuanity.Text);
-            //DateTime date = dtpCalendar.Value.Date;
-
-            myDBUtilitesStock.ShipStock(selectedProductCode);
+            int productQuantity = int.Parse(txtQuanity.Text);
+            DateTime date = dtpCalendar.Value.Date;
+            
+            myDBUtilitesStock.ShipStock(selectedProductCode, date, productQuantity, true);
             
         }
 
@@ -92,7 +92,7 @@ namespace FinalProject_RoryStouder
             int productQuantity = int.Parse(txtQuanity.Text);
             DateTime date = dtpCalendar.Value.Date;
 
-            myDBUtilitesStock.AddStock(selectedProductCode, date, productQuantity);
+            myDBUtilitesStock.AddStock(selectedProductCode, date, productQuantity, true);
             this.productsTableAdapter.Fill(this.stockDataSet.Products);
         }
 
