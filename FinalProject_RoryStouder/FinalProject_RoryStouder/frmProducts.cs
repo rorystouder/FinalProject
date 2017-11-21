@@ -47,7 +47,7 @@ namespace FinalProject_RoryStouder
             lblStatus.Text = string.Empty;
 
             int code = 0;
-            string name = txtProductName.Text;
+            int quantity = 0;
             bool status = false;
 
             // validate inputs
@@ -85,7 +85,7 @@ namespace FinalProject_RoryStouder
             try
             {
                 // add the new product to the database
-                adapter.Insert(code, name, status);
+                //adapter.Insert(status, quantity, code);
                 lblStatus.Text = "Product added";
                 
             }
@@ -115,7 +115,7 @@ namespace FinalProject_RoryStouder
             lblStatus.Text = string.Empty;
 
             int code = 0;
-            string name = txtProductName.Text;
+            int quantity = 0;
             bool status = false;
 
             // validate inputs
@@ -155,7 +155,7 @@ namespace FinalProject_RoryStouder
                 if (IfProductExists())
                 {
                     // Update the product in the database
-                    adapter.Update(name, status, code);
+                    adapter.UpdateQuantity(status, quantity, code);
                     lblStatus.Text = "Product Updated";
                 }
                 else
@@ -177,64 +177,64 @@ namespace FinalProject_RoryStouder
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            // HOUSEKEEPING
-            errProviderProducts.Clear();
-            lblStatus.Text = string.Empty;
+            //// HOUSEKEEPING
+            //errProviderProducts.Clear();
+            //lblStatus.Text = string.Empty;
 
-            if (dgvProducts.SelectedRows.Count > 0)
-            {
-                int code = 0;
-                string name = txtProductName.Text;
-                bool status = false;
+            //if (dgvProducts.SelectedRows.Count > 0)
+            //{
+            //    int code = 0;
+            //    string name = txtProductName.Text;
+            //    bool status = false;
 
-                // validate inputs
-                if (txtProductCode.Text == "")
-                {
-                    errProviderProducts.SetError(txtProductCode, "Product code must not be blank!");
-                    return;
-                }
+            //    // validate inputs
+            //    if (txtProductCode.Text == "")
+            //    {
+            //        errProviderProducts.SetError(txtProductCode, "Product code must not be blank!");
+            //        return;
+            //    }
 
-                if (!int.TryParse(txtProductCode.Text, out code))
-                {
-                    errProviderProducts.SetError(txtProductCode, "Product code should be a numeric value!");
-                    return;
-                }
-                else
-                {
-                    code = int.Parse(txtProductCode.Text);
-                }
+            //    if (!int.TryParse(txtProductCode.Text, out code))
+            //    {
+            //        errProviderProducts.SetError(txtProductCode, "Product code should be a numeric value!");
+            //        return;
+            //    }
+            //    else
+            //    {
+            //        code = int.Parse(txtProductCode.Text);
+            //    }
 
-                if (txtProductName.Text == "")
-                {
-                    errProviderProducts.SetError(txtProductName, "Product name must not be blank!");
-                    return;
-                }
+            //    if (txtProductName.Text == "")
+            //    {
+            //        errProviderProducts.SetError(txtProductName, "Product name must not be blank!");
+            //        return;
+            //    }
 
-                DialogResult r =
-                    MessageBox.Show("Deleting the selected product will permanently remove it. Do you want to continue?",
-                    "Confirm Delete", MessageBoxButtons.YesNo);
+            //    DialogResult r =
+            //        MessageBox.Show("Deleting the selected product will permanently remove it. Do you want to continue?",
+            //        "Confirm Delete", MessageBoxButtons.YesNo);
 
-                if (r == DialogResult.Yes)
-                {
-                    int selectedId = (int)dgvProducts.SelectedRows[0].Cells[0].Value;
+            //    if (r == DialogResult.Yes)
+            //    {
+            //        int selectedId = (int)dgvProducts.SelectedRows[0].Cells[0].Value;
 
-                    if (myDBUtilites.Delete(int.Parse(txtProductCode.Text)))
-                    {
-                        dgvProducts.DataSource = myDBUtilites.Items;
-                        formLoading = true;
-                        UpdateForm();
-                        lblStatus.Text = "Product deleted";
-                    }
-                    else
-                    {
-                        lblStatus.Text = "Error deleting this product";
-                    }
-                }
-            }
-            else
-            {
-                lblStatus.Text = "You must select a product";
-            }
+            //        if (myDBUtilites.Delete(int.Parse(txtProductCode.Text)))
+            //        {
+            //            dgvProducts.DataSource = myDBUtilites.Items;
+            //            formLoading = true;
+            //            UpdateForm();
+            //            lblStatus.Text = "Product deleted";
+            //        }
+            //        else
+            //        {
+            //            lblStatus.Text = "Error deleting this product";
+            //        }
+            //    }
+            //}
+            //else
+            //{
+            //    lblStatus.Text = "You must select a product";
+            //}
         }
 
         private void dgvProducts_MouseDoubleClick(object sender, MouseEventArgs e)

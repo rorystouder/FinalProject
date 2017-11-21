@@ -33,7 +33,7 @@ namespace FinalProject_RoryStouder
             // TODO: This line of code loads data into the 'stockDataSet.Products' table. You can move, or remove it, as needed.
             this.productsTableAdapter.Fill(this.stockDataSet.Products);
             // TODO: This line of code loads data into the 'stockDataSet.Stock' table. You can move, or remove it, as needed.
-            this.stockTableAdapter.GetAllStock(this.stockDataSet.Stock);
+            this.stockTableAdapter.Fill(this.stockDataSet.Stock);
             this.productAdapter.Fill(this.stockDataSet.Products);
 
         }
@@ -46,8 +46,7 @@ namespace FinalProject_RoryStouder
         private void dgvProducts_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             bool status = true;
-            //txtProductCode.Text = dgvProducts.SelectedRows[0].Cells[0].Value.ToString();
-            //txtProductName.Text = dgvProducts.SelectedRows[0].Cells[1].Value.ToString();
+            
             if (dgvProducts.SelectedRows[0].Cells[2].Selected == true)
             {
                 DateTime dt = DateTime.ParseExact(dgvProducts.CurrentCell.Value.ToString(), "MM/dd/yyyy", CultureInfo.CurrentCulture);
@@ -95,6 +94,13 @@ namespace FinalProject_RoryStouder
 
             myDBUtilitesStock.AddStock(selectedProductCode, date, productQuantity);
             this.productsTableAdapter.Fill(this.stockDataSet.Products);
+        }
+
+        private void btnFind_Click(object sender, EventArgs e)
+        {
+            int code = (int)cboProducts.SelectedValue;
+
+            dgvProducts.DataSource = myDBUtilitesStock.GetByCode(code);
         }
     }
 }

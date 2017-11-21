@@ -32,7 +32,12 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.dgvProducts = new System.Windows.Forms.DataGridView();
+            this.productCodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.transDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StockID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.quantityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.stockBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.stockDataSet = new FinalProject_RoryStouder.StockDataSet();
             this.btnReceive = new System.Windows.Forms.Button();
             this.btnShip = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -47,21 +52,17 @@
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.shippingTotalsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.receivingTotalsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.productCodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.transDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.quantityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.stockBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.stockDataSet = new FinalProject_RoryStouder.StockDataSet();
             this.stockTableAdapter = new FinalProject_RoryStouder.StockDataSetTableAdapters.StockTableAdapter();
             this.cboProducts = new System.Windows.Forms.ComboBox();
             this.productBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.productsTableAdapter = new FinalProject_RoryStouder.StockDataSetTableAdapters.ProductsTableAdapter();
+            this.btnFind = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errProviderStock)).BeginInit();
-            this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.stockBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.stockDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errProviderStock)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -97,9 +98,25 @@
             this.dgvProducts.Name = "dgvProducts";
             this.dgvProducts.RowTemplate.Height = 24;
             this.dgvProducts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvProducts.Size = new System.Drawing.Size(460, 285);
+            this.dgvProducts.Size = new System.Drawing.Size(491, 285);
             this.dgvProducts.TabIndex = 18;
             this.dgvProducts.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dgvProducts_MouseDoubleClick);
+            // 
+            // productCodeDataGridViewTextBoxColumn
+            // 
+            this.productCodeDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.productCodeDataGridViewTextBoxColumn.DataPropertyName = "ProductCode";
+            this.productCodeDataGridViewTextBoxColumn.HeaderText = "Product Code";
+            this.productCodeDataGridViewTextBoxColumn.Name = "productCodeDataGridViewTextBoxColumn";
+            this.productCodeDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.productCodeDataGridViewTextBoxColumn.Width = 140;
+            // 
+            // transDateDataGridViewTextBoxColumn
+            // 
+            this.transDateDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.transDateDataGridViewTextBoxColumn.DataPropertyName = "TransDate";
+            this.transDateDataGridViewTextBoxColumn.HeaderText = "Date";
+            this.transDateDataGridViewTextBoxColumn.Name = "transDateDataGridViewTextBoxColumn";
             // 
             // StockID
             // 
@@ -107,9 +124,25 @@
             this.StockID.HeaderText = "Stock ID";
             this.StockID.Name = "StockID";
             // 
+            // quantityDataGridViewTextBoxColumn
+            // 
+            this.quantityDataGridViewTextBoxColumn.DataPropertyName = "Quantity";
+            this.quantityDataGridViewTextBoxColumn.HeaderText = "Quantity";
+            this.quantityDataGridViewTextBoxColumn.Name = "quantityDataGridViewTextBoxColumn";
+            // 
+            // stockBindingSource
+            // 
+            this.stockBindingSource.DataMember = "Stock";
+            this.stockBindingSource.DataSource = this.stockDataSet;
+            // 
+            // stockDataSet
+            // 
+            this.stockDataSet.DataSetName = "StockDataSet";
+            this.stockDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // btnReceive
             // 
-            this.btnReceive.Location = new System.Drawing.Point(226, 513);
+            this.btnReceive.Location = new System.Drawing.Point(321, 518);
             this.btnReceive.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.btnReceive.Name = "btnReceive";
             this.btnReceive.Size = new System.Drawing.Size(105, 49);
@@ -120,7 +153,7 @@
             // 
             // btnShip
             // 
-            this.btnShip.Location = new System.Drawing.Point(117, 513);
+            this.btnShip.Location = new System.Drawing.Point(201, 518);
             this.btnShip.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.btnShip.Name = "btnShip";
             this.btnShip.Size = new System.Drawing.Size(105, 49);
@@ -228,38 +261,6 @@
             this.receivingTotalsToolStripMenuItem.Size = new System.Drawing.Size(191, 26);
             this.receivingTotalsToolStripMenuItem.Text = "Receiving Totals";
             // 
-            // productCodeDataGridViewTextBoxColumn
-            // 
-            this.productCodeDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.productCodeDataGridViewTextBoxColumn.DataPropertyName = "ProductCode";
-            this.productCodeDataGridViewTextBoxColumn.HeaderText = "Product Code";
-            this.productCodeDataGridViewTextBoxColumn.Name = "productCodeDataGridViewTextBoxColumn";
-            this.productCodeDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.productCodeDataGridViewTextBoxColumn.Width = 140;
-            // 
-            // transDateDataGridViewTextBoxColumn
-            // 
-            this.transDateDataGridViewTextBoxColumn.DataPropertyName = "TransDate";
-            this.transDateDataGridViewTextBoxColumn.HeaderText = "Date";
-            this.transDateDataGridViewTextBoxColumn.Name = "transDateDataGridViewTextBoxColumn";
-            this.transDateDataGridViewTextBoxColumn.Width = 74;
-            // 
-            // quantityDataGridViewTextBoxColumn
-            // 
-            this.quantityDataGridViewTextBoxColumn.DataPropertyName = "Quantity";
-            this.quantityDataGridViewTextBoxColumn.HeaderText = "Quantity";
-            this.quantityDataGridViewTextBoxColumn.Name = "quantityDataGridViewTextBoxColumn";
-            // 
-            // stockBindingSource
-            // 
-            this.stockBindingSource.DataMember = "Stock";
-            this.stockBindingSource.DataSource = this.stockDataSet;
-            // 
-            // stockDataSet
-            // 
-            this.stockDataSet.DataSetName = "StockDataSet";
-            this.stockDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // stockTableAdapter
             // 
             this.stockTableAdapter.ClearBeforeFill = true;
@@ -285,11 +286,23 @@
             // 
             this.productsTableAdapter.ClearBeforeFill = true;
             // 
+            // btnFind
+            // 
+            this.btnFind.Location = new System.Drawing.Point(78, 518);
+            this.btnFind.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.btnFind.Name = "btnFind";
+            this.btnFind.Size = new System.Drawing.Size(105, 49);
+            this.btnFind.TabIndex = 25;
+            this.btnFind.Text = "Find";
+            this.btnFind.UseVisualStyleBackColor = true;
+            this.btnFind.Click += new System.EventHandler(this.btnFind_Click);
+            // 
             // frmStock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(513, 602);
+            this.Controls.Add(this.btnFind);
             this.Controls.Add(this.cboProducts);
             this.Controls.Add(this.dtpCalendar);
             this.Controls.Add(this.txtQuanity);
@@ -311,11 +324,11 @@
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.stockBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.stockDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errProviderStock)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.stockBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.stockDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -344,12 +357,13 @@
         private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem shippingTotalsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem receivingTotalsToolStripMenuItem;
+        private System.Windows.Forms.ComboBox cboProducts;
+        private System.Windows.Forms.BindingSource productBindingSource;
+        private StockDataSetTableAdapters.ProductsTableAdapter productsTableAdapter;
         private System.Windows.Forms.DataGridViewTextBoxColumn productCodeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn transDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn StockID;
         private System.Windows.Forms.DataGridViewTextBoxColumn quantityDataGridViewTextBoxColumn;
-        private System.Windows.Forms.ComboBox cboProducts;
-        private System.Windows.Forms.BindingSource productBindingSource;
-        private StockDataSetTableAdapters.ProductsTableAdapter productsTableAdapter;
+        private System.Windows.Forms.Button btnFind;
     }
 }

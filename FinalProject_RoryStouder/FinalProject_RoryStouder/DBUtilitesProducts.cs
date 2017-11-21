@@ -20,25 +20,25 @@ namespace FinalProject_RoryStouder
             }
         }
 
-        public bool Insert(int id, string name, bool status)
-        {
-            bool result = true;
-            try
-            {
-                adapter.Insert(id, name, status);
-            }
-            catch (Exception ex)
-            {
-                result = false;
-            }
+        //public bool Insert(int id, string name, bool status)
+        //{
+        //    bool result = true;
+        //    try
+        //    {
+        //        adapter.Insert(id, name, status);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        result = false;
+        //    }
 
-            return result;
+        //    return result;
             
-        }
+        //}
 
-        public bool Update(int id, string name, bool status)
+        public bool Update(int code, bool status, int quantity)
         {
-            if (adapter.Update(name, status, id) > 0)
+            if (adapter.UpdateQuantity(status, quantity, code) > 0)
             {
                 return true;
             }
@@ -48,16 +48,16 @@ namespace FinalProject_RoryStouder
             }
         }
 
-        public bool Delete(int id)
-        {
-            bool result = true;
+        //public bool Delete(int id)
+        //{
+        //    bool result = true;
             
-            if (adapter.Delete(id) > 0)
-            {
-                result = true;
-            }
-            return result;
-        }
+        //    if (adapter.Delete(id) > 0)
+        //    {
+        //        result = true;
+        //    }
+        //    return result;
+        //}
 
         
     }
